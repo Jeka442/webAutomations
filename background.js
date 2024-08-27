@@ -1,14 +1,20 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "getCookie") {
-        console.log("cookie name:", request.cookieName);
-      chrome.cookies.get({ url: request.url, name: request.cookieName }, (cookie) => {
+  if (request.action === "getCookie") {
+    chrome.cookies.get(
+      { url: request.url, name: request.cookieName },
+      (cookie) => {
         if (cookie) {
-          sendResponse({ value: cookie.value });
+          const resCookie = `${cookie.name}=${cookie.value}; SameSite=${
+            cookie.sameSite
+          }; path=${cookie.path}; domain=${cookie.domain}; ${cookie.hostOnly ? "" : "Secure"}`;
+
+          sendResponse({ value: resCookie });
         } else {
           sendResponse({ value: null });
         }
-      });
-      return true;  // Will respond asynchronously
-    }
-  });
-  
+      }
+    );
+    return true; // Will respond asynchronously
+  }
+});
+
