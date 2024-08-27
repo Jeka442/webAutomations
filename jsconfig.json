@@ -8,6 +8,6 @@
         "chrome": ["node_modules/@types/chrome"]
       }
     },
-    "include": ["*.js", "scripts/jsonviewer.js", "globals.d.ts"]
+    "include": ["*.js", "scripts/jsonviewer.js", "globals.d.ts", "popup/popup.js"]
   }
   

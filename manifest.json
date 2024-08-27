@@ -3,11 +3,32 @@
   "name": "webAutomation",
   "version": "1.0",
   "description": "web automation and tools",
-  "permissions": ["activeTab", "scripting", "downloads", "contextMenus"],
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "downloads",
+    "contextMenus",
+    "cookies"
+  ],
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
     "128": "icon128.png"
+  },
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
   },
   "content_scripts": [
     {
