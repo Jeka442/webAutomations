@@ -7,7 +7,7 @@ const config = {
     },
     {
       id: "webboGetToken",
-      name: "webbo get token",
+      name: "Set webbo token",
       file: "scripts/webboGetToken.js",
     }
   ],
