@@ -3,6 +3,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     chrome.cookies.get(
       { url: request.url, name: request.cookieName },
       (cookie) => {
+        if (chrome.runtime.lastError) {
+          console.error(chrome.runtime.lastError.message); // Debugging any runtime errors
+        }
         if (cookie) {
           const resCookie = `${cookie.name}=${cookie.value}; SameSite=${
             cookie.sameSite
@@ -19,14 +22,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               cookie: resCookie,
               target: request.origin,
             }),
-          });
-
-          sendResponse({ value: resCookie });
+          })
+            .then(() => {
+              sendResponse({ value: true });
+            })
+            .catch((error) => {
+              console.error("Fetch error:", error);
+              sendResponse({ value: false });
+            });
         } else {
-          sendResponse({ value: null });
+          console.warn("Cookie not found:", request.cookieName);
+          sendResponse({ value: false });
         }
       }
     );
-    return true; // Will respond asynchronously
+    return true; // Ensure the response is sent asynchronously
   }
 });

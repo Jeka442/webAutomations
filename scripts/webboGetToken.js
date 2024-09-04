@@ -7,26 +7,11 @@ chrome.runtime.sendMessage(
     cookieName: ".ASPXFORMSAUTH",
     origin: window.location.origin,
   },
-  (response) => {
+  async (response) => {
     if (response && response.value) {
-      // Create a temporary textarea element
-      const textarea = document.createElement("textarea");
-      textarea.value = response.value;
-      document.body.appendChild(textarea);
-      textarea.select(); // Select the text
-
-      try {
-        // Copy the text to the clipboard
-        document.execCommand("copy");
-        console.log("Cookie value copied to clipboard:", response.value);
-      } catch (err) {
-        console.error("Failed to copy the cookie value:", err);
-      } finally {
-        // Clean up
-        document.body.removeChild(textarea);
-      }
+      alert("Ok");
     } else {
-      console.log("MyCookie not found");
+      alert("cookie not found");
     }
   }
 );
