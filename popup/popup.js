@@ -6,14 +6,18 @@ const config = {
       file: "scripts/webboMassActions.js",
     },
     {
-      id: "webboGetToken",
-      name: "Set webbo token",
-      file: "scripts/webboGetToken.js",
-    }
+      id: "autoReload",
+      name: "auto reload on/off",
+      file: "scripts/autoReload.js",
+    },{
+      id: "activeDraggable",
+      name: "draggable mode",
+      file: "scripts/draggable.js",
+    },
   ],
 };
 
-function startup() {
+async function startup() {
   let html = ``;
   for (let item of config.Automation) {
     html += `<button id="${item.id}">${item.name}</button>`;
@@ -38,6 +42,7 @@ function startup() {
       });
     });
     // Your script execution logic here, using `activeTabId` as the target
+
   });
 }
 

@@ -9,9 +9,16 @@ chrome.runtime.sendMessage(
   },
   async (response) => {
     if (response && response.value) {
-      alert("Ok");
+      console.info("WebAutomation - Token found:", response.value);
     } else {
-      alert("cookie not found");
+      console.info("WebAutomation - missing token");
     }
   }
 );
+
+if (window.localStorage.getItem("autoReload")) {
+  console.log("Reload has found and setted to 10 minutes");
+  setTimeout(() => {
+    window.location.reload();
+  }, 600000);
+}
